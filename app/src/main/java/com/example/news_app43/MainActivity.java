@@ -1,6 +1,9 @@
 package com.example.news_app43;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private NavController navController;
+    public static  Prefs prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        navController.navigate(R.id.boardFragment);
+        Prefs prefs = new Prefs(this);
+        if (!prefs.isShown())
+            navController.navigate(R.id.boardFragment);
+
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 ArrayList<Integer> fragments = new ArrayList<>();
@@ -61,5 +69,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return navController.navigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Cleanone:
+                prefs.clearPreferences();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menuu,menu);
+        return true;
     }
 }

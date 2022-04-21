@@ -73,6 +73,8 @@ public class BoardFragment extends Fragment implements OnItemClickListener {
     }
 
     public void itemClick() {
+        Prefs prefs = new Prefs(requireContext());
+        prefs.saveState();
         NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment_activity_main);
         navController.navigateUp();
     }

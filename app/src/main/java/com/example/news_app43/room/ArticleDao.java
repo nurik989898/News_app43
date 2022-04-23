@@ -1,6 +1,7 @@
 package com.example.news_app43.room;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -15,11 +16,15 @@ public interface ArticleDao {
     List<Article> getAll();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Article article);
+    void Insert(Article article);
 
     @Query("SELECT * FROM article ORDER BY text ASC")
     List<Article> sort();
 
     @Query("SELECT * FROM article WHERE text LIKE '%' || :search || '%'")
     List<Article> getSearch(String search);
+
+    @Delete
+    void Delete(Article article);
+
 }

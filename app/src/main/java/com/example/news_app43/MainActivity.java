@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        Prefs prefs = new Prefs(this);
+        prefs = new Prefs(this);
         if (prefs.isShown())
             navController.navigate(R.id.boardFragment);
 
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.Cleanone:
                 prefs.clearPreferences();
+                App.getDataBase().clearAllTables();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -23,8 +23,9 @@ import java.util.Locale;
 
 public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
     private Context context;
-    private ArrayList<Article> list;
+    private List<Article> list;
     private OnItemClickListener onItemClickListener;
+
     public  NewsAdaptor(){
         list = new ArrayList<>();
     }
@@ -35,15 +36,14 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
         return new ViewHolder(ItemNewsBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
 
     }
+    public void setList(List<Article> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     holder.bind(list.get(position));
-    }
-
-    public void setList(ArrayList<Article> list) {
-        this.list = list;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -65,14 +65,14 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
     }
     public void insertItem(Article article,int index){
         list.set(index, article);
-        notifyItemInserted(index);
+        notifyItemChanged(index);
     }
 
     public void addItems(List<Article> list) {
-        this.list.addAll(list);
         this.list = list;
         notifyDataSetChanged();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemNewsBinding binding;
@@ -108,7 +108,7 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
         public void bind(Article article) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss, dd MMM yyy", Locale.ROOT);
             String data = String.valueOf(simpleDateFormat.format(article.getDate()));
-            binding.smallText.setText(article.getText());
+            binding.smallText.setText(data);
             binding.Texttitle.setText(article.getText());
             if (getAdapterPosition() % 2 == 0){
                 binding.itemNews.setBackgroundColor(ContextCompat.getColor(context,R.color.purple_200));

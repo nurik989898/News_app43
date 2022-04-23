@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,8 +90,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 Article article = (Article) result.getSerializable("article");
-                Log.e("Home","result = " + article.getText());
-                adaptor.addItem(article);
+                if (isediting){
+                    adaptor.insertItem(article,index);
+                }else {
+                    adaptor.addItem(article);
+                    Log.e("Home", "result = " + article.getText());
+                }
             }
         });
         binding.reciclerView.setAdapter(adaptor);
@@ -99,6 +104,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(int position) {
                 Article article = adaptor.getItem(position);
                 Toast.makeText(requireContext(),article.getText(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -123,12 +129,26 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.removeItem(R.id.sort);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Type here to search");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adaptor.setList(App.getDataBase().articleDao().getSearch(s));
+                return false;
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.sort){
+            if (item.getItemId() == R.id.sort){
             adaptor.setList(App.getDataBase().articleDao().sort());
             binding.reciclerView.setAdapter(adaptor);
             return true;

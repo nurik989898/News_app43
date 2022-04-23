@@ -18,6 +18,7 @@ import com.example.news_app43.models.Article;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
@@ -40,6 +41,11 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
     holder.bind(list.get(position));
     }
 
+    public void setList(ArrayList<Article> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -60,6 +66,12 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
     public void insertItem(Article article,int index){
         list.set(index, article);
         notifyItemInserted(index);
+    }
+
+    public void addItems(List<Article> list) {
+        this.list.addAll(list);
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

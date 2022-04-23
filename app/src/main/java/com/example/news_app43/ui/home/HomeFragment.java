@@ -1,8 +1,13 @@
 package com.example.news_app43.ui.home;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,21 +21,32 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.news_app43.App;
 import com.example.news_app43.NewsAdaptor;
 import com.example.news_app43.OnItemClickListener;
 import com.example.news_app43.R;
 import com.example.news_app43.databinding.FragmentHomeBinding;
 import com.example.news_app43.models.Article;
 
+import java.util.List;
+
 public class HomeFragment extends Fragment {
+    private List<Article> list;
     private NewsAdaptor adaptor;
     private FragmentHomeBinding binding;
+    private boolean isediting = false;
+    private int index;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adaptor = new NewsAdaptor();
+        setHasOptionsMenu(true);
+
+        list = App.getDataBase().articleDao().getAll();
+        adaptor.addItems(list);
     }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,9 +61,30 @@ public class HomeFragment extends Fragment {
         binding.FAcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isediting = false;
                 openFragment();
             }
         });
+        binding.editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            list = App.getDataBase().articleDao().getSearch(editable.toString());
+            adaptor.addItems(list);
+            }
+        });
+        binding.reciclerView.setAdapter(adaptor);
+        list = App.getDataBase().articleDao().getAll();
+        adaptor.addItems(list);
         getParentFragmentManager().setFragmentResultListener("rk_news", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -80,6 +117,23 @@ public class HomeFragment extends Fragment {
     private void openFragment() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigate(R.id.newsFragment);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.removeItem(R.id.sort);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.sort){
+            adaptor.setList(App.getDataBase().articleDao().sort());
+            binding.reciclerView.setAdapter(adaptor);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

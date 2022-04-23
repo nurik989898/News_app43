@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
         Prefs prefs = new Prefs(this);
-        if (!prefs.isShown())
+        if (prefs.isShown())
             navController.navigate(R.id.boardFragment);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {

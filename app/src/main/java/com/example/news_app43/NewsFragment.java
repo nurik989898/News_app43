@@ -43,6 +43,7 @@ public class NewsFragment extends Fragment {
       Bundle bundle = new Bundle();
       Article article = new Article(text,System.currentTimeMillis());
       bundle.putSerializable("article", article);
+      App.getDataBase().articleDao().Insert(article);
       getParentFragmentManager().setFragmentResult("rk_news",bundle);
         close();
     }

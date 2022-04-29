@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.news_app43.databinding.FragmentNewsBinding;
@@ -68,34 +70,21 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MainActivity.prefs = new Prefs(requireContext());
-        binding.profileImage.setOnClickListener(view1 -> Image());
         binding.editTextProfile.setText(MainActivity.prefs.getText());
         if (MainActivity.prefs.getPic() != null){
             Glide.with(binding.profileImage).load(MainActivity.prefs.getPic()).circleCrop().into(binding.profileImage);
         }
         SaveText();
+        ImageView imageView = view.findViewById(R.id.profileImage);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_secondProfileFragment);
+            }
+        });
     }
 
-    private void Image() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        mGetContent.launch(intent);
-    }
-    ActivityResultLauncher<Intent>mGetContent = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        uri = intent.getData();
-                        Glide.with(binding.profileImage).load(uri).circleCrop().into(binding.profileImage);
-                        MainActivity.prefs.savePicture(String.valueOf(uri));
-                    }
-                }
-            }
-    );
+
     private void SaveText(){
         binding.editTextProfile.addTextChangedListener(new TextWatcher() {
             @Override

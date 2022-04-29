@@ -13,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:transitionName="example_transition"
         android:src="@drawable/ic_profile"/>
     <EditText
         android:id="@+id/edit_textProfile"

@@ -22,9 +22,9 @@ public class BoardAdaptor extends RecyclerView.Adapter<BoardAdaptor.ViewHolder> 
     public BoardAdaptor(OnItemClickListener onClickListener) {
         this.onClickListener = onClickListener;
         list = new ArrayList<>();
-        list.add(new Board("Welcome to my app", "This unussual", R.drawable.ic_dashboard_black_24dp));
-        list.add(new Board("Welcome to my app", "This unussual", R.drawable.ic_dashboard_black_24dp));
-        list.add(new Board("Welcome to my app", "This unussual", R.drawable.ic_dashboard_black_24dp));
+        list.add(new Board("Welcome to my app", "This unussual"));
+        list.add(new Board("Welcome to my app", "This unussual"));
+        list.add(new Board("Welcome to my app", "This unussual"));
     }
 
     @NonNull
@@ -56,20 +56,25 @@ public class BoardAdaptor extends RecyclerView.Adapter<BoardAdaptor.ViewHolder> 
             Board board = list.get(position);
             binding.Texttitle.setText(board.getTitle());
             binding.text2.setText(board.getDesc());
-            binding.imageView.setImageResource(board.getImage());
-            if (position == list.size() - 1)
+        if (position == list.size() - 1){
                 binding.BtnStart.setVisibility(View.VISIBLE);
-            else
-                binding.BtnStart.setVisibility(View.INVISIBLE);
-            binding.BtnStart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickListener.itemClick();
-                }
-            });
-
-
+        }else{
+            binding.BtnStart.setVisibility(View.INVISIBLE);
         }
+        if (position == 0){
+            binding.Lotie.setAnimation(R.raw.wifi);
+        }else if (position == 1){
+            binding.Lotie.setAnimation(R.raw.coming);
+        }else{
+            binding.Lotie.setAnimation(R.raw.celery);
+        }
+        binding.BtnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
     }
 }
 

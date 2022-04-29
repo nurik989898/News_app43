@@ -31,10 +31,19 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.news_app43.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_secondProfileFragment"
+            app:destination="@id/secondProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/boardFragment"
         android:name="com.example.news_app43.BoardFragment"
         android:label="fragment_board"
         tools:layout="@layout/fragment_board" />
+    <fragment
+        android:id="@+id/secondProfileFragment"
+        android:name="com.example.news_app43.SecondProfileFragment"
+        android:label="fragment_second_profile"
+        tools:layout="@layout/fragment_second_profile" />
 </navigation>

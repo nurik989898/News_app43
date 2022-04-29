@@ -8,7 +8,9 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2827346801757813" />
         <entry key="app/src/main/res/layout/fragment_news.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_second_profile.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/item_news.xml" value="0.3325515747070313" />
+        <entry key="app/src/main/res/layout/item_pager_board.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/pager_board.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/menu/menuu.xml" value="0.125" />

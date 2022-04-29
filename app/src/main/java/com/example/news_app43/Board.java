@@ -3,7 +3,7 @@ package com.example.news_app43;
 public class Board {
     private String title;
     private String desc;
-    private int image;
+
 
     public String getTitle() {
         return title;
@@ -21,17 +21,8 @@ public class Board {
         this.desc = desc;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
-    public Board(String title, String desc, int image) {
+    public Board(String title, String desc) {
         this.title = title;
         this.desc = desc;
-        this.image = image;
     }
 }

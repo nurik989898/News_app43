@@ -34,7 +34,9 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_navigation_profile_to_secondProfileFragment"
-            app:destination="@id/secondProfileFragment" />
+            app:destination="@id/secondProfileFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/boardFragment"

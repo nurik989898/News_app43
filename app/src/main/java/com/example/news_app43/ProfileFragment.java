@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -79,6 +80,7 @@ public class ProfileFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder().addSharedElement(imageView,"example_transition").build();
                 Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_secondProfileFragment);
             }
         });

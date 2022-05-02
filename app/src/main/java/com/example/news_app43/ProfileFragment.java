@@ -76,12 +76,11 @@ public class ProfileFragment extends Fragment {
             Glide.with(binding.profileImage).load(MainActivity.prefs.getPic()).circleCrop().into(binding.profileImage);
         }
         SaveText();
-        ImageView imageView = view.findViewById(R.id.profileImage);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder().addSharedElement(imageView,"example_transition").build();
-                Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_secondProfileFragment);
+                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder().addSharedElement(binding.profileImage,"example_transition").build();
+                Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_secondProfileFragment,null,null, extras);
             }
         });
     }

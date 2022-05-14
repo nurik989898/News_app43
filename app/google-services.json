@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "657874066856",
+    "project_id": "news-app43-e8578",
+    "storage_bucket": "news-app43-e8578.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657874066856:android:bd86ece52ee1a24b4f919d",
+        "android_client_info": {
+          "package_name": "com.example.news_app43"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657874066856-lpcekk3iimkprs7qefu8mj95qn8shmdl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.news_app43",
+            "certificate_hash": "4de15ae19184b6372632681ce1b9c22e0cb09737"
+          }
+        },
+        {
+          "client_id": "657874066856-a9ttjm2o2js9v1v7djgmdvgdo3lqa5no.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSYGDGdeGxpAoyralcwKI8AoctUK-JLY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657874066856-a9ttjm2o2js9v1v7djgmdvgdo3lqa5no.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

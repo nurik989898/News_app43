@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".auth.LoginFragment"
+    android:orientation="vertical">
+    <LinearLayout
+    android:id="@+id/codeA"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+  <EditText
+      android:id="@+id/Edittype"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Type number"
+      android:layout_marginTop="10dp"
+      android:textAlignment="center"
+     />
+   <Button
+       android:id="@+id/Btnnum"
+       android:layout_width="wrap_content"
+       android:layout_gravity="center"
+       android:layout_marginTop="5dp"
+       android:layout_height="wrap_content"
+       android:text="Get Number via SMS"/>
+        <Button
+            android:id="@+id/Resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resend"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/codeB"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+        android:id="@+id/EditCode"
+            android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:hint="Type code"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+        <Button
+        android:id="@+id/BtnOpen"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -28,6 +28,8 @@ import com.example.news_app43.OnItemClickListener;
 import com.example.news_app43.R;
 import com.example.news_app43.databinding.FragmentHomeBinding;
 import com.example.news_app43.models.Article;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private boolean isediting = false;
     private int index;
+    FirebaseAuth firebaseAuth;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,14 +49,17 @@ public class HomeFragment extends Fragment {
 
         list = App.getDataBase().articleDao().getAll();
         adaptor.addItems(list);
+
     }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
@@ -66,6 +72,7 @@ public class HomeFragment extends Fragment {
                 openFragment();
             }
         });
+
         binding.editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -120,6 +127,14 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void checkUserStatus() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+        }else {
+            getActivity().finish();
+        }
+    }
+
     private void openFragment() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigate(R.id.newsFragment);
@@ -128,7 +143,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        menu.removeItem(R.id.sort);
+        menu.removeItem(R.id.logout);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setQueryHint("Type here to search");
@@ -148,7 +163,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-            if (item.getItemId() == R.id.sort){
+            if (item.getItemId() == R.id.logout){
             adaptor.setList(App.getDataBase().articleDao().sort());
             binding.reciclerView.setAdapter(adaptor);
             return true;

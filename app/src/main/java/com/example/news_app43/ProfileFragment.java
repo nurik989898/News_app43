@@ -79,8 +79,10 @@ public class ProfileFragment extends Fragment {
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder().addSharedElement(binding.profileImage,"example_transition").build();
-                Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_secondProfileFragment,null,null, extras);
+                FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder().
+                        addSharedElement(binding.profileImage,"example_transition").build();
+                Navigation.findNavController(v).navigate
+                        (R.id.action_navigation_profile_to_secondProfileFragment,null,null, extras);
             }
         });
     }

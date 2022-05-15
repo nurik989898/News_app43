@@ -106,7 +106,7 @@ public class NewsAdaptor extends RecyclerView.Adapter<NewsAdaptor.ViewHolder> {
         }
 
         public void bind(Article article) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss, dd MMM yyy", Locale.ROOT);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss, dd MMM yyyy", Locale.ROOT);
             String data = String.valueOf(simpleDateFormat.format(article.getDate()));
             binding.smallText.setText(data);
             binding.Texttitle.setText(article.getText());

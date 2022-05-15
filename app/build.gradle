@@ -57,9 +57,11 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:5.0.3"
     //Firebase
-    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
     implementation 'com.google.firebase:firebase-auth:21.0.3'
-    implementation platform('com.google.firebase:firebase-bom:30.0.0')
-            implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-firestore:24.1.0'
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
+    implementation 'com.google.firebase:firebase-storage'
 
 }

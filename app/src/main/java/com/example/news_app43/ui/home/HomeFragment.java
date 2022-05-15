@@ -127,14 +127,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void checkUserStatus() {
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser != null){
-        }else {
-            getActivity().finish();
-        }
-    }
-
     private void openFragment() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigate(R.id.newsFragment);

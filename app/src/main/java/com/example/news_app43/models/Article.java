@@ -15,6 +15,10 @@ public class Article implements Serializable {
         return id;
     }
 
+    public Article() {
+
+    }
+
     public void setId(int id) {
         this.id = id;
     }
